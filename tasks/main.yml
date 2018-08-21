@@ -1,0 +1,67 @@
+- name: download key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+    state: present
+  tags:
+    - docker
+
+- name: add repository
+  apt_repository:
+    repo: 'deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable'
+    filename: docker
+    update_cache: yes
+    state: present
+  tags:
+    - docker
+
+- name: install packages
+  with_items:
+    - docker-ce
+  package:
+    name: '{{ item }}'
+    state: present
+  tags:
+    - docker
+
+- name: config dir
+  file:
+    path: /root/.docker
+    state: directory
+  tags:
+    - docker
+
+- name: config file
+  template:
+    src: config.j2
+    dest: /root/.docker/config.json
+  tags:
+    - docker
+
+- name: prepare service
+  notify:
+    - restart docker
+  template:
+    src: service.j2
+    dest: /etc/systemd/system/docker.service
+  tags:
+    - docker
+
+- name: write default
+  notify:
+    - restart docker
+  template:
+    src: default.j2
+    dest: /etc/default/docker
+  tags:
+    - docker
+
+- name: start service
+  systemd:
+    name: docker
+    state: started
+    daemon_reload: yes
+    masked: no
+    enabled: yes
+  tags:
+    - docker
