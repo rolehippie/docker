@@ -1,3 +1,12 @@
+- name: create dirs
+  with_items:
+    - /etc/systemd/system/docker.service.d
+  file:
+    path: '{{ item }}'
+    state: directory
+  tags:
+    - docker
+
 - name: download key
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
@@ -24,35 +33,12 @@
   tags:
     - docker
 
-- name: config dir
-  file:
-    path: /root/.docker
-    state: directory
-  tags:
-    - docker
-
-- name: config file
-  template:
-    src: config.j2
-    dest: /root/.docker/config.json
-  tags:
-    - docker
-
-- name: prepare service
+- name: write override
   notify:
     - restart docker
   template:
-    src: service.j2
-    dest: /etc/systemd/system/docker.service
-  tags:
-    - docker
-
-- name: write default
-  notify:
-    - restart docker
-  template:
-    src: default.j2
-    dest: /etc/default/docker
+    src: override.j2
+    dest: /etc/systemd/system/docker.service.d/override.conf
   tags:
     - docker
 
@@ -63,5 +49,17 @@
     daemon_reload: yes
     masked: no
     enabled: yes
+  tags:
+    - docker
+
+- name: docker login
+  with_items: '{{ docker_registries }}'
+  docker_login:
+    registry: '{{ item.url }}'
+    username: '{{ item.username }}'
+    password: '{{ item.password }}'
+    email: '{{ item.email | default("") }}'
+    reauthorize: '{{ item.reauthorize | default("yes") }}'
+    state: '{{ item.state | default("present") }}'
   tags:
     - docker
