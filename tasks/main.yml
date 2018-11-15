@@ -27,6 +27,7 @@
 - name: install packages
   with_items:
     - docker-ce
+    - python3-docker
   package:
     name: '{{ item }}'
     state: present
