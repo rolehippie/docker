@@ -1,6 +1,7 @@
 - name: create dirs
   with_items:
     - /etc/systemd/system/docker.service.d
+    - /etc/docker
   file:
     path: '{{ item }}'
     state: directory
@@ -31,6 +32,15 @@
   package:
     name: '{{ item }}'
     state: present
+  tags:
+    - docker
+
+- name: write config
+  notify:
+    - restart docker
+  template:
+    src: config.j2
+    dest: /etc/docker/daemon.json
   tags:
     - docker
 
