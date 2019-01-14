@@ -35,11 +35,11 @@
   tags:
     - docker
 
-- name: write config
+- name: write daemon
   notify:
     - restart docker
   template:
-    src: config.j2
+    src: daemon.j2
     dest: /etc/docker/daemon.json
   tags:
     - docker
@@ -70,7 +70,7 @@
     username: '{{ item.username }}'
     password: '{{ item.password }}'
     email: '{{ item.email | default("") }}'
-    reauthorize: '{{ item.reauthorize | default("yes") }}'
+    reauthorize: '{{ item.reauthorize | default("no") }}'
     state: '{{ item.state | default("present") }}'
   tags:
     - docker

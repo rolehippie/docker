@@ -1,4 +1,4 @@
-docker_opts:
 docker_iptables: True
 docker_ip_masq: True
+docker_opts:
 docker_registries: []
