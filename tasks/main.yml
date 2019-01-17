@@ -35,15 +35,6 @@
   tags:
     - docker
 
-- name: write daemon
-  notify:
-    - restart docker
-  template:
-    src: daemon.j2
-    dest: /etc/docker/daemon.json
-  tags:
-    - docker
-
 - name: write override
   notify:
     - restart docker
