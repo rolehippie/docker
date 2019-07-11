@@ -1,5 +1,5 @@
 - name: create dirs
-  with_items:
+  loop:
     - /etc/systemd/system/docker.service.d
     - /etc/docker
   file:
@@ -26,7 +26,7 @@
     - docker
 
 - name: install packages
-  with_items:
+  loop:
     - docker-ce
     - python3-docker
   package:
@@ -55,7 +55,7 @@
     - docker
 
 - name: docker login
-  with_items: '{{ docker_registries }}'
+  loop: '{{ docker_registries }}'
   docker_login:
     registry: '{{ item.url }}'
     username: '{{ item.username }}'
