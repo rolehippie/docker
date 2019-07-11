@@ -56,6 +56,8 @@
 
 - name: docker login
   loop: '{{ docker_registries }}'
+  loop_control:
+    label: '{{ item.url }}'
   docker_login:
     registry: '{{ item.url }}'
     username: '{{ item.username }}'
