@@ -70,6 +70,7 @@ steps:
   environment:
     ANSIBLE_DOCTOR_LOG_LEVEL: INFO
     ANSIBLE_DOCTOR_FORCE_OVERWRITE: true
+    ANSIBLE_DOCTOR_EXCLUDE_FILES: molecule/
     PY_COLORS: 1
 
 - name: commit
