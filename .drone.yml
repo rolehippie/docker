@@ -65,7 +65,7 @@ platform:
 
 steps:
 - name: generate
-  image: xoxys/ansible-doctor:amd64
+  image: xoxys/ansible-doctor:0.1-amd64
   pull: always
   environment:
     ANSIBLE_DOCTOR_LOG_LEVEL: INFO
