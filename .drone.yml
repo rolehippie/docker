@@ -1,0 +1,140 @@
+---
+kind: pipeline
+name: linting
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: later
+  image: toolhippie/ansible-later:latest
+  pull: always
+  commands:
+    - ansible-later
+
+trigger:
+  ref:
+  - refs/heads/master
+  - refs/tags/**
+  - refs/pull/**
+
+---
+kind: pipeline
+name: deployment
+
+platform:
+  os: linux
+  arch: amd64
+
+concurrency:
+  limit: 1
+
+workspace:
+  base: /drone/src
+  path: docker
+
+steps:
+- name: molecule
+  image: xoxys/molecule:hcloud-linux-amd64
+  pull: always
+  commands:
+  - /bin/bash /docker-entrypoint.sh
+  - molecule test -s default
+  environment:
+    HCLOUD_TOKEN:
+      from_secret: hcloud_token
+    USER: root
+    PY_COLORS: 1
+
+trigger:
+  ref:
+  - refs/heads/master
+  - refs/tags/**
+
+depends_on:
+  - linting
+
+---
+kind: pipeline
+name: documentation
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: generate
+  image: xoxys/ansible-doctor:amd64
+  pull: always
+  environment:
+    ANSIBLE_DOCTOR_LOG_LEVEL: INFO
+    ANSIBLE_DOCTOR_FORCE_OVERWRITE: true
+    PY_COLORS: 1
+
+- name: commit
+  pull: always
+  image: plugins/git-action:latest
+  settings:
+    actions:
+    - commit
+    - push
+    author_email: "drone@webhippie.de"
+    author_name: Drone
+    branch: master
+    message: "[SKIP CI] update readme"
+    remote: "https://github.com/rolehippie/docker"
+    netrc_machine: github.com
+    netrc_useriname: tboerger
+    netrc_password:
+      from_secret: github_token
+  when:
+    ref:
+    - refs/heads/master
+    - refs/tags/**
+
+rigger:
+  ref:
+  - refs/heads/master
+  - refs/tags/**
+  - refs/pull/**
+
+depends_on:
+  - deployment
+
+---
+kind: pipeline
+name: notifications
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: matrix
+  image: plugins/matrix
+  settings:
+    homeserver:
+      from_secret: matrix_homeserver
+    password:
+      from_secret: matrix_password
+    roomid:
+      from_secret: matrix_roomid
+    template: "Status: **{{ build.status }}**<br/> Build: [{{ repo.Owner }}/{{ repo.Name }}]({{ build.link }}) ({{ build.branch }}) by {{ build.author }}<br/> Message: {{ build.message }}"
+    username:
+      from_secret: matrix_username
+  when:
+    status:
+    - success
+    - failure
+
+trigger:
+  ref:
+  - refs/heads/master
+  - refs/tags/**
+
+depends_on:
+  - linting
+  - deployment
+  - documentation
+...
