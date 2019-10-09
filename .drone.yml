@@ -87,7 +87,8 @@ steps:
     message: "[SKIP CI] update readme"
     remote: "https://github.com/rolehippie/docker"
     netrc_machine: github.com
-    netrc_username: tboerger
+    netrc_username:
+      from_secret: github_username
     netrc_password:
       from_secret: github_token
   when:
