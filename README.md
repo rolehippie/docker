@@ -1,30 +1,53 @@
-# docker
+# None
 
-TBD
+Ansible role to configure docker
 
+## Table of content
 
-## Security
+* [Default Variables](#default-variables)
+  * [docker_opts](#docker_opts)
+  * [docker_registries](#docker_registries)
+  * [docker_arch](#docker_arch)
+* [Dependencies](#dependencies)
+* [License](#license)
+* [Author](#author)
 
-If you find a security issue please contact thomas@webhippie.de first.
+---
+## Default Variables
 
+### docker_opts
 
-## Contributing
+#### Default value
 
-Fork -> Patch -> Push -> Pull Request
+```YAML
+docker_opts:
+```
 
+### docker_registries
 
-## Authors
+#### Default value
 
-* [Thomas Boerger](https://github.com/tboerger)
+```YAML
+docker_registries: []
+```
 
+### docker_arch
+
+#### Default value
+
+```YAML
+docker_arch: amd64
+```
+
+## Dependencies
+
+None.
 
 ## License
 
 Apache-2.0
 
+## Author
 
-## Copyright
+Thomas Boerger
 
-```
-Copyright (c) 2018 Thomas Boerger <thomas@webhippie.de>
-```
