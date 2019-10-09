@@ -87,13 +87,12 @@ steps:
     message: "[SKIP CI] update readme"
     remote: "https://github.com/rolehippie/docker"
     netrc_machine: github.com
-    netrc_useriname: tboerger
+    netrc_username: tboerger
     netrc_password:
       from_secret: github_token
   when:
     ref:
     - refs/heads/master
-    - refs/tags/**
 
 rigger:
   ref:
