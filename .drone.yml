@@ -114,13 +114,11 @@ steps:
 - name: matrix
   image: plugins/matrix
   settings:
-    homeserver:
-      from_secret: matrix_homeserver
+    homeserver: https://matrix.org
     password:
       from_secret: matrix_password
     roomid:
       from_secret: matrix_roomid
-    template: "Status: **{{ build.status }}**<br/> Build: [{{ repo.Owner }}/{{ repo.Name }}]({{ build.link }}) ({{ build.branch }}) by {{ build.author }}<br/> Message: {{ build.message }}"
     username:
       from_secret: matrix_username
   when:
@@ -137,4 +135,5 @@ depends_on:
   - linting
   - deployment
   - documentation
+
 ...
