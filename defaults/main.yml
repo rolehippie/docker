@@ -1,3 +1,4 @@
+---
 docker_opts:
 docker_registries: []
 docker_arch: amd64
