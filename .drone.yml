@@ -8,7 +8,7 @@ platform:
 
 steps:
 - name: later
-  image: toolhippie/ansible-later:latest
+  image: xoxys/ansible-later:latest
   pull: always
   commands:
     - ansible-later
