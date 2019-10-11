@@ -8,7 +8,7 @@ platform:
 
 steps:
 - name: later
-  image: toolhippie/ansible-later:latest
+  image: xoxys/ansible-later:latest
   pull: always
   commands:
     - ansible-later
@@ -65,7 +65,7 @@ platform:
 
 steps:
 - name: generate
-  image: xoxys/ansible-doctor:amd64
+  image: xoxys/ansible-doctor:latest
   pull: always
   environment:
     ANSIBLE_DOCTOR_LOG_LEVEL: INFO
