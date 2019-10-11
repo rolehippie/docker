@@ -3,12 +3,13 @@ docker_opts:
 
 # @var docker_registries:description: Automatic login to all given registries.
 # @var docker_registries:example: >
-# - registry: "myregistry.example.com"
-#   username: "docker"
-#   password: "secure"
-#   email: "docker@example.com"
-#   reauthorize: "no"
-#   state: "present"
+# docker_registries:
+#   - registry: "myregistry.example.com"
+#     username: "docker"
+#     password: "secure"
+#     email: "docker@example.com"
+#     reauthorize: "no"
+#     state: "present"
 # @end
 docker_registries: []
 docker_arch: amd64
