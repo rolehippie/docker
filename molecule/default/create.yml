@@ -86,3 +86,7 @@
         search_regex: SSH
         delay: 10
       with_items: "{{ lookup('file', molecule_instance_config) | molecule_from_yaml }}"
+
+    - name: Wait for VM to settle down
+      pause:
+        minutes: 2 
