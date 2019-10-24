@@ -15,6 +15,7 @@ Ansible role to configure docker
 * [Author](#author)
 
 ---
+
 ## Default Variables
 
 ### docker_opts
@@ -47,7 +48,6 @@ docker_registries:
     state: "present"
 ```
 
-
 ### docker_arch
 
 #### Default value
@@ -67,4 +67,3 @@ Apache-2.0
 ## Author
 
 Thomas Boerger
-
