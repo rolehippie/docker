@@ -68,3 +68,5 @@
     state: '{{ item.state | default("present") }}'
   tags:
     - docker
+
+...
