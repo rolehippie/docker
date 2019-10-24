@@ -72,7 +72,6 @@ steps:
     ANSIBLE_DOCTOR_FORCE_OVERWRITE: true
     ANSIBLE_DOCTOR_EXCLUDE_FILES: molecule/
     ANSIBLE_DOCTOR_CUSTOM_HEADER: HEADER.md
-    PY_COLORS: 1
 
 - name: commit
   pull: always
@@ -95,7 +94,7 @@ steps:
     ref:
     - refs/heads/master
 
-rigger:
+trigger:
   ref:
   - refs/heads/master
   - refs/tags/**
@@ -113,7 +112,7 @@ platform:
   arch: amd64
 
 steps:
-- name: matrix
+- name: notify
   image: plugins/matrix
   settings:
     homeserver: https://matrix.org
@@ -123,15 +122,14 @@ steps:
       from_secret: matrix_roomid
     username:
       from_secret: matrix_username
-  when:
-    status:
-    - success
-    - failure
 
 trigger:
   ref:
   - refs/heads/master
   - refs/tags/**
+  status:
+  - success
+  - failure
 
 depends_on:
   - linting

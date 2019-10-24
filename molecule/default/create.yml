@@ -89,4 +89,4 @@
 
     - name: Wait for VM to settle down
       pause:
-        minutes: 2 
+        seconds: 30

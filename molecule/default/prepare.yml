@@ -3,7 +3,6 @@
   hosts: all
   gather_facts: false
   tasks:
-    - name: Install python for Ansible
-      raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal python-zipstream)
-      become: true
-      changed_when: false
+    - name: Wait for apt lock
+      shell: while fuser /var/lib/apt/lists/lock >/dev/null 2>&1; do echo 'Waiting for apt list lock.' && sleep 10; done
+      changed_when: False
