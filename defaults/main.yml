@@ -1,6 +1,4 @@
 ---
-docker_opts:
-
 # @var docker_registries:description: List of docker registries to auto login
 # @var docker_registries:example: >
 # docker_registries:
