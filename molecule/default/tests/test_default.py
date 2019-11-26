@@ -16,3 +16,10 @@ def test_docker_running_and_enabled(host):
     docker = host.service("docker")
     assert docker.is_running
     assert docker.is_enabled
+
+
+def test_docker_config(host):
+    config = host.run("docker info | tr -d ' '").stdout
+
+    assert "LiveRestoreEnabled:true" in config
+    assert "LoggingDriver:json-file" in config

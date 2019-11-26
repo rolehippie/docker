@@ -11,6 +11,14 @@ docker_opts:
 #     reauthorize: "no"
 #     state: "present"
 # @end
+
+docker_daemon_config:
+  log-driver: json-file
+  log-opts:
+    max-size: 5m
+    max-file: "3"
+  live-restore: True
+
 docker_registries: []
 docker_arch: amd64
 
