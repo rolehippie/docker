@@ -7,9 +7,9 @@ Ansible role to configure docker
 ## Table of content
 
 * [Default Variables](#default-variables)
-  * [docker_opts](#docker_opts)
-  * [docker_registries](#docker_registries)
   * [docker_arch](#docker_arch)
+  * [docker_daemon_config](#docker_daemon_config)
+  * [docker_registries](#docker_registries)
 * [Dependencies](#dependencies)
 * [License](#license)
 * [Author](#author)
@@ -18,17 +18,34 @@ Ansible role to configure docker
 
 ## Default Variables
 
-### docker_opts
+### docker_arch
+
+Target system architecture used to select correct deb repository
 
 #### Default value
 
 ```YAML
-docker_opts:
+docker_arch: amd64
+```
+
+### docker_daemon_config
+
+Add config options to daemon.json
+
+#### Default value
+
+```YAML
+docker_daemon_config:
+  log-driver: json-file
+  log-opts:
+    max-size: 5m
+    max-file: '3'
+  live-restore: true
 ```
 
 ### docker_registries
 
-Automatic login to all given registries.
+List of docker registries to auto login
 
 #### Default value
 
@@ -46,14 +63,6 @@ docker_registries:
     email: "docker@example.com"
     reauthorize: "no"
     state: "present"
-```
-
-### docker_arch
-
-#### Default value
-
-```YAML
-docker_arch: amd64
 ```
 
 ## Dependencies
