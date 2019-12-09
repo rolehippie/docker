@@ -45,6 +45,15 @@
   tags:
     - docker
 
+- name: write daemon config
+  notify:
+    - restart docker
+  copy:
+    content: "{{ docker_daemon_config | to_nice_json }}"
+    dest: /etc/docker/daemon.json
+  tags:
+    - docker
+
 - name: start service
   systemd:
     name: docker

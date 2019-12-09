@@ -1,7 +1,5 @@
 ---
-docker_opts:
-
-# @var docker_registries:description: Automatic login to all given registries.
+# @var docker_registries:description: List of docker registries to auto login
 # @var docker_registries:example: >
 # docker_registries:
 #   - registry: "myregistry.example.com"
@@ -12,6 +10,16 @@ docker_opts:
 #     state: "present"
 # @end
 docker_registries: []
+
+# @var docker_daemon_config:description: Add config options to daemon.json
+docker_daemon_config:
+  log-driver: json-file
+  log-opts:
+    max-size: 5m
+    max-file: "3"
+  live-restore: True
+
+# @var docker_arch:description: Target system architecture used to select correct deb repository
 docker_arch: amd64
 
 ...
