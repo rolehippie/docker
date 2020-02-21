@@ -8,18 +8,17 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 
 
 def test_docker_is_installed(host):
-    docker = host.package("docker-ce")
-    assert docker.is_installed
+    pkg = host.package("docker-ce")
+    assert pkg.is_installed
 
 
 def test_docker_running_and_enabled(host):
-    docker = host.service("docker")
-    assert docker.is_running
-    assert docker.is_enabled
+    svc = host.service("docker")
+    assert svc.is_running
+    assert svc.is_enabled
 
 
 def test_docker_config(host):
-    config = host.run("docker info | tr -d ' '").stdout
-
-    assert "LiveRestoreEnabled:true" in config
-    assert "LoggingDriver:json-file" in config
+    info = host.run("docker info | tr -d ' '").stdout
+    assert "LiveRestoreEnabled:true" in info
+    assert "LoggingDriver:json-file" in info

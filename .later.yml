@@ -1,7 +1,4 @@
 ---
-logging:
-  level: error
-
 rules:
   exclude_filter:
     - ANSIBLE0007

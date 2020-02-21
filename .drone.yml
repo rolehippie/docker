@@ -11,7 +11,7 @@ steps:
   image: xoxys/ansible-later:latest
   pull: always
   commands:
-    - ansible-later
+  - ansible-later
 
 trigger:
   ref:
@@ -21,7 +21,7 @@ trigger:
 
 ---
 kind: pipeline
-name: deployment
+name: testing
 
 platform:
   os: linux
@@ -32,38 +32,54 @@ concurrency:
 
 workspace:
   base: /drone/src
-  path: docker
+  path: ${DRONE_REPO_NAME}
 
 steps:
 - name: molecule
-  image: xoxys/molecule:hcloud-linux-amd64
+  image: xoxys/molecule:2
   pull: always
-  commands:
-  - /bin/bash /docker-entrypoint.sh
-  - molecule test -s default
   environment:
     HCLOUD_TOKEN:
       from_secret: hcloud_token
-    USER: root
-    PY_COLORS: 1
+  commands:
+  - molecule test -s default
 
 trigger:
   ref:
   - refs/heads/master
   - refs/tags/**
+  - refs/pull/**
 
 depends_on:
-  - linting
+- linting
 
 ---
 kind: pipeline
-name: documentation
+name: docs
 
 platform:
   os: linux
   arch: amd64
 
+clone:
+  disable: true
+
 steps:
+- name: clone
+  image: plugins/git-action:latest
+  pull: always
+  settings:
+    actions:
+    - clone
+    remote: https://github.com/${DRONE_REPO}
+    branch: ${DRONE_SOURCE_BRANCH}
+    path: /drone/src
+    netrc_machine: github.com
+    netrc_username:
+      from_secret: github_username
+    netrc_password:
+      from_secret: github_token
+
 - name: generate
   image: xoxys/ansible-doctor:latest
   pull: always
@@ -73,23 +89,30 @@ steps:
     ANSIBLE_DOCTOR_EXCLUDE_FILES: molecule/
     ANSIBLE_DOCTOR_CUSTOM_HEADER: HEADER.md
 
-- name: commit
+- name: diff
+  image: toolhippie/git:latest
   pull: always
+  commands:
+    - git diff
+
+- name: commit
   image: plugins/git-action:latest
+  pull: always
   settings:
     actions:
     - commit
     - push
-    author_email: "drone@webhippie.de"
-    author_name: Drone
+    remote: https://github.com/${DRONE_REPO}
     branch: master
-    message: "[SKIP CI] update readme"
-    remote: "https://github.com/rolehippie/docker"
+    path: /drone/src
     netrc_machine: github.com
     netrc_username:
       from_secret: github_username
     netrc_password:
       from_secret: github_token
+    author_email: "drone@webhippie.de"
+    author_name: Drone
+    message: "[skip ci] update readme"
   when:
     ref:
     - refs/heads/master
@@ -97,15 +120,14 @@ steps:
 trigger:
   ref:
   - refs/heads/master
-  - refs/tags/**
   - refs/pull/**
 
 depends_on:
-  - deployment
+  - testing
 
 ---
 kind: pipeline
-name: notifications
+name: notify
 
 platform:
   os: linux
@@ -114,6 +136,7 @@ platform:
 steps:
 - name: notify
   image: plugins/matrix
+  pull: always
   settings:
     homeserver: https://matrix.org
     password:
@@ -133,7 +156,7 @@ trigger:
 
 depends_on:
   - linting
-  - deployment
-  - documentation
+  - testing
+  - docs
 
 ...
