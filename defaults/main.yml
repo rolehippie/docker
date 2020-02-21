@@ -1,13 +1,14 @@
+# Standards: 0.1
 ---
 # @var docker_registries:description: List of docker registries to auto login
 # @var docker_registries:example: >
 # docker_registries:
-#   - registry: "myregistry.example.com"
-#     username: "docker"
-#     password: "secure"
-#     email: "docker@example.com"
-#     reauthorize: "no"
-#     state: "present"
+#   - registry: myregistry.example.com
+#     username: docker
+#     password: secure
+#     email: docker@example.com
+#     reauthorize: False
+#     state: present
 # @end
 docker_registries: []
 

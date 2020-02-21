@@ -12,6 +12,7 @@ galaxy_info:
         - bionic
   galaxy_tags:
     - docker
+
 dependencies: []
 
 ...

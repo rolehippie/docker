@@ -1,5 +1,6 @@
+# Standards: 0.1
 ---
-- name: create dirs
+- name: Create required dirs
   loop:
     - /etc/systemd/system/docker.service.d
     - /etc/docker
@@ -9,7 +10,7 @@
   tags:
     - docker
 
-- name: download key
+- name: Download repo key
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
@@ -17,7 +18,7 @@
   tags:
     - docker
 
-- name: add repository
+- name: Add apt repository
   apt_repository:
     repo: 'deb [arch={{ docker_arch }}] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable'
     filename: docker
@@ -26,7 +27,7 @@
   tags:
     - docker
 
-- name: install packages
+- name: Install required packages
   loop:
     - docker-ce
     - python3-docker
@@ -36,25 +37,25 @@
   tags:
     - docker
 
-- name: write override
+- name: Write service override
   notify:
-    - restart docker
+    - Restart docker
   template:
     src: override.j2
     dest: /etc/systemd/system/docker.service.d/override.conf
   tags:
     - docker
 
-- name: write daemon config
+- name: Write daemon config
   notify:
-    - restart docker
+    - Restart docker
   copy:
     content: "{{ docker_daemon_config | to_nice_json }}"
     dest: /etc/docker/daemon.json
   tags:
     - docker
 
-- name: start service
+- name: Start docker service
   systemd:
     name: docker
     state: started
@@ -64,7 +65,7 @@
   tags:
     - docker
 
-- name: docker login
+- name: Handle registry login
   loop: '{{ docker_registries }}'
   loop_control:
     label: '{{ item.url }}'
@@ -73,7 +74,7 @@
     username: '{{ item.username }}'
     password: '{{ item.password }}'
     email: '{{ item.email | default("") }}'
-    reauthorize: '{{ item.reauthorize | default("no") }}'
+    reauthorize: '{{ item.reauthorize | default(False) }}'
     state: '{{ item.state | default("present") }}'
   tags:
     - docker
