@@ -57,12 +57,12 @@ docker_registries: []
 
 ```YAML
 docker_registries:
-  - registry: "myregistry.example.com"
-    username: "docker"
-    password: "secure"
-    email: "docker@example.com"
-    reauthorize: "no"
-    state: "present"
+  - registry: myregistry.example.com
+    username: docker
+    password: secure
+    email: docker@example.com
+    reauthorize: False
+    state: present
 ```
 
 ## Dependencies
