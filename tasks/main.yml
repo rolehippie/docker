@@ -55,6 +55,21 @@
   tags:
     - docker
 
+- name: Create networks
+  notify:
+    - Restart docker
+  loop: '{{ docker_networks + docker_networks_extra }}'
+  loop_control:
+    label: '{{ item.name }}'
+  docker_network:
+    name: '{{ item.name }}'
+    enable_ipv6: '{{ item.enable_ipv6 | default(False) }}'
+    ipam_config: '{{ item.ipam_config | default(omit) }}'
+    force: '{{ item.force | default(omit) }}'
+    state: '{{ item.state | default("present") }}'
+  tags:
+    - docker
+
 - name: Start docker service
   systemd:
     name: docker
