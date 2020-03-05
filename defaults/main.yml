@@ -27,6 +27,7 @@ docker_daemon_config:
 #     driver: default("bridge")
 #     enable_ipv6: default(False)
 #     ipam_config: default(omit)
+#     force: default(omit)
 #     state: default("present")
 # @end
 docker_networks: []
