@@ -5,7 +5,7 @@
     - /etc/systemd/system/docker.service.d
     - /etc/docker
   file:
-    path: '{{ item }}'
+    path: "{{ item }}"
     state: directory
   tags:
     - docker
@@ -20,9 +20,9 @@
 
 - name: Add apt repository
   apt_repository:
-    repo: 'deb [arch={{ docker_arch }}] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable'
+    repo: "deb [arch={{ docker_arch }}] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
     filename: docker
-    update_cache: yes
+    update_cache: True
     state: present
   tags:
     - docker
@@ -32,7 +32,7 @@
     - docker-ce
     - python3-docker
   package:
-    name: '{{ item }}'
+    name: "{{ item }}"
     state: present
   tags:
     - docker
@@ -59,23 +59,23 @@
   systemd:
     name: docker
     state: started
-    daemon_reload: yes
-    masked: no
-    enabled: yes
+    daemon_reload: True
+    masked: False
+    enabled: True
   tags:
     - docker
 
 - name: Handle registry login
-  loop: '{{ docker_registries }}'
+  loop: "{{ docker_registries }}"
   loop_control:
-    label: '{{ item.url }}'
+    label: "{{ item.url }}"
   docker_login:
-    registry: '{{ item.url }}'
-    username: '{{ item.username }}'
-    password: '{{ item.password }}'
-    email: '{{ item.email | default("") }}'
-    reauthorize: '{{ item.reauthorize | default(False) }}'
-    state: '{{ item.state | default("present") }}'
+    registry: "{{ item.url }}"
+    username: "{{ item.username }}"
+    password: "{{ item.password }}"
+    email: "{{ item.email | default('') }}"
+    reauthorize: "{{ item.reauthorize | default(False) }}"
+    state: "{{ item.state | default('present') }}"
   tags:
     - docker
 
