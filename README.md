@@ -9,6 +9,8 @@ Ansible role to configure docker
 * [Default Variables](#default-variables)
   * [docker_arch](#docker_arch)
   * [docker_daemon_config](#docker_daemon_config)
+  * [docker_networks_extra](#docker_networks_extra)
+  * [docker_networks_general](#docker_networks_general)
   * [docker_registries](#docker_registries)
 * [Dependencies](#dependencies)
 * [License](#license)
@@ -41,6 +43,52 @@ docker_daemon_config:
     max-size: 5m
     max-file: '3'
   live-restore: true
+```
+
+### docker_networks_extra
+
+List of extra docker networks to create
+
+#### Default value
+
+```YAML
+docker_networks_extra: []
+```
+
+#### Example usage
+
+```YAML
+docker_networks_extra:
+  - name: traefik
+    driver: bridge
+    enable_ipv6: True
+    ipam_config:
+      - subnet: fdd1:ac8c:0557:7ce1::/64
+    force: False
+    state: present
+```
+
+### docker_networks_general
+
+List of general docker networks to create
+
+#### Default value
+
+```YAML
+docker_networks_general: []
+```
+
+#### Example usage
+
+```YAML
+docker_networks_general:
+  - name: traefik
+    driver: bridge
+    enable_ipv6: True
+    ipam_config:
+      - subnet: fdd1:ac8c:0557:7ce1::/64
+    force: False
+    state: present
 ```
 
 ### docker_registries
