@@ -20,9 +20,9 @@ docker_daemon_config:
     max-file: "3"
   live-restore: True
 
-# @var docker_networks:description: List of additional docker networks to create
-# @var docker_networks:example: >
-# docker_networks:
+# @var docker_networks_general:description: List of general docker networks to create
+# @var docker_networks_general:example: >
+# docker_networks_general:
 #   - name: traefik
 #     driver: bridge
 #     enable_ipv6: True
@@ -31,8 +31,19 @@ docker_daemon_config:
 #     force: False
 #     state: present
 # @end
-docker_networks: []
-# @var docker_networks:description: List of extra docker networks to create. For configuration detials see `docker_networks`
+docker_networks_general: []
+
+# @var docker_networks_extra:description: List of extra docker networks to create
+# @var docker_networks_extra:example: >
+# docker_networks_extra:
+#   - name: traefik
+#     driver: bridge
+#     enable_ipv6: True
+#     ipam_config:
+#       - subnet: fdd1:ac8c:0557:7ce1::/64
+#     force: False
+#     state: present
+# @end
 docker_networks_extra: []
 
 # @var docker_arch:description: Target system architecture used to select correct deb repository
