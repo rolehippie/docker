@@ -65,6 +65,19 @@
   tags:
     - docker
 
+- name: Create defined networks
+  loop: "{{ docker_networks_general + docker_networks_extra }}"
+  loop_control:
+    label: "{{ item.name }}"
+  docker_network:
+    name: "{{ item.name }}"
+    enable_ipv6: "{{ item.enable_ipv6 | default(False) }}"
+    ipam_config: "{{ item.ipam_config | default([]) }}"
+    force: "{{ item.force | default(omit) }}"
+    state: "{{ item.state | default('present') }}"
+  tags:
+    - docker
+
 - name: Handle registry login
   loop: "{{ docker_registries }}"
   loop_control:
