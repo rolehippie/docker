@@ -12,6 +12,12 @@
 # @end
 docker_registries: []
 
+# @var docker_daemon_command:description: Inject a service override into systemd
+docker_daemon_override: False
+
+# @var docker_daemon_command:description: Command executed to start the daemon
+docker_daemon_command: /usr/bin/dockerd -H unix://
+
 # @var docker_daemon_config:description: Add config options to daemon.json
 docker_daemon_config:
   log-driver: json-file

@@ -38,6 +38,7 @@
     - docker
 
 - name: Write service override
+  when: docker_daemon_override
   notify:
     - Restart docker
   template:
