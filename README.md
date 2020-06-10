@@ -8,7 +8,9 @@ Ansible role to configure docker
 
 * [Default Variables](#default-variables)
   * [docker_arch](#docker_arch)
+  * [docker_daemon_command](#docker_daemon_command)
   * [docker_daemon_config](#docker_daemon_config)
+  * [docker_daemon_override](#docker_daemon_override)
   * [docker_networks_extra](#docker_networks_extra)
   * [docker_networks_general](#docker_networks_general)
   * [docker_registries](#docker_registries)
@@ -30,6 +32,16 @@ Target system architecture used to select correct deb repository
 docker_arch: amd64
 ```
 
+### docker_daemon_command
+
+Command executed to start the daemon
+
+#### Default value
+
+```YAML
+docker_daemon_command: /usr/bin/dockerd -H unix://
+```
+
 ### docker_daemon_config
 
 Add config options to daemon.json
@@ -43,6 +55,14 @@ docker_daemon_config:
     max-size: 5m
     max-file: '3'
   live-restore: true
+```
+
+### docker_daemon_override
+
+#### Default value
+
+```YAML
+docker_daemon_override: false
 ```
 
 ### docker_networks_extra
@@ -115,7 +135,7 @@ docker_registries:
 
 ## Dependencies
 
-- None
+* None
 
 ## License
 
