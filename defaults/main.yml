@@ -12,6 +12,9 @@
 # @end
 docker_registries: []
 
+# @var docker_upstream_version:description: Install from upstream repository
+docker_upstream_version: True
+
 # @var docker_daemon_command:description: Inject a service override into systemd
 docker_daemon_override: False
 
