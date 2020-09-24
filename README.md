@@ -14,6 +14,7 @@ Ansible role to configure docker
   * [docker_networks_extra](#docker_networks_extra)
   * [docker_networks_general](#docker_networks_general)
   * [docker_registries](#docker_registries)
+  * [docker_upstream_version](#docker_upstream_version)
 * [Dependencies](#dependencies)
 * [License](#license)
 * [Author](#author)
@@ -131,6 +132,16 @@ docker_registries:
     email: docker@example.com
     reauthorize: False
     state: present
+```
+
+### docker_upstream_version
+
+Install from upstream repository
+
+#### Default value
+
+```YAML
+docker_upstream_version: true
 ```
 
 ## Dependencies
