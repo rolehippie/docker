@@ -17,6 +17,7 @@ Building and improving this Ansible role have been sponsored by my employer **Pr
   * [docker_daemon_command](#docker_daemon_command)
   * [docker_daemon_config](#docker_daemon_config)
   * [docker_daemon_override](#docker_daemon_override)
+  * [docker_mount_flags](#docker_mount_flags)
   * [docker_networks_extra](#docker_networks_extra)
   * [docker_networks_general](#docker_networks_general)
   * [docker_registries](#docker_registries)
@@ -70,6 +71,16 @@ docker_daemon_config:
 
 ```YAML
 docker_daemon_override: false
+```
+
+### docker_mount_flags
+
+Optionally define mount flags for systemd
+
+#### Default value
+
+```YAML
+docker_mount_flags:
 ```
 
 ### docker_networks_extra
