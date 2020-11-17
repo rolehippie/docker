@@ -89,7 +89,7 @@
     registry: "{{ item.url }}"
     username: "{{ item.username }}"
     password: "{{ item.password }}"
-    email: "{{ item.email | default('') }}"
+    email: "{{ item.email | default(omit) }}"
     reauthorize: "{{ item.reauthorize | default(False) }}"
     state: "{{ item.state | default('present') }}"
   tags:
