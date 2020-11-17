@@ -3,7 +3,7 @@
 # @var docker_registries:description: List of docker registries to auto login
 # @var docker_registries:example: >
 # docker_registries:
-#   - registry: myregistry.example.com
+#   - url: myregistry.example.com
 #     username: docker
 #     password: secure
 #     email: docker@example.com

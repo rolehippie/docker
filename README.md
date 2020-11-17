@@ -143,7 +143,7 @@ docker_registries: []
 
 ```YAML
 docker_registries:
-  - registry: myregistry.example.com
+  - url: myregistry.example.com
     username: docker
     password: secure
     email: docker@example.com
