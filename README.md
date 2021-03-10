@@ -20,7 +20,8 @@ Building and improving this Ansible role have been sponsored by my employer **Pr
   * [docker_mount_flags](#docker_mount_flags)
   * [docker_networks_extra](#docker_networks_extra)
   * [docker_networks_general](#docker_networks_general)
-  * [docker_registries](#docker_registries)
+  * [docker_registries_extra](#docker_registries_extra)
+  * [docker_registries_general](#docker_registries_general)
   * [docker_upstream_version](#docker_upstream_version)
 * [Dependencies](#dependencies)
 * [License](#license)
@@ -129,20 +130,42 @@ docker_networks_general:
     state: present
 ```
 
-### docker_registries
+### docker_registries_extra
 
-List of docker registries to auto login
+List of extra docker registries to auto login
 
 #### Default value
 
 ```YAML
-docker_registries: []
+docker_registries_extra: []
 ```
 
 #### Example usage
 
 ```YAML
-docker_registries:
+docker_registries_extra:
+  - url: myregistry.example.com
+    username: docker
+    password: secure
+    email: docker@example.com
+    reauthorize: False
+    state: present
+```
+
+### docker_registries_general
+
+List of general docker registries to auto login
+
+#### Default value
+
+```YAML
+docker_registries_general: '{{ docker_registries | default([]) }}'
+```
+
+#### Example usage
+
+```YAML
+docker_registries_general:
   - url: myregistry.example.com
     username: docker
     password: secure

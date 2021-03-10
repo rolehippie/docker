@@ -1,8 +1,8 @@
 # Standards: 1.2
 ---
-# @var docker_registries:description: List of docker registries to auto login
-# @var docker_registries:example: >
-# docker_registries:
+# @var docker_registries_general:description: List of general docker registries to auto login
+# @var docker_registries_general:example: >
+# docker_registries_general:
 #   - url: myregistry.example.com
 #     username: docker
 #     password: secure
@@ -10,7 +10,19 @@
 #     reauthorize: False
 #     state: present
 # @end
-docker_registries: []
+docker_registries_general: "{{ docker_registries | default([]) }}"
+
+# @var docker_registries_extra:description: List of extra docker registries to auto login
+# @var docker_registries_extra:example: >
+# docker_registries_extra:
+#   - url: myregistry.example.com
+#     username: docker
+#     password: secure
+#     email: docker@example.com
+#     reauthorize: False
+#     state: present
+# @end
+docker_registries_extra: []
 
 # @var docker_upstream_version:description: Install from upstream repository
 docker_upstream_version: True

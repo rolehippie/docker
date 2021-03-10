@@ -32,6 +32,7 @@
 - name: Install required packages
   loop:
     - "{{ 'docker-ce' if docker_upstream_version else 'docker.io' }}"
+    - pass
     - python3-docker
   package:
     name: "{{ item }}"
@@ -82,7 +83,7 @@
     - docker
 
 - name: Handle registry login
-  loop: "{{ docker_registries }}"
+  loop: "{{ docker_registries_general + docker_registries_extra }}"
   loop_control:
     label: "{{ item.url | default('hub.docker.com') }}"
   when: item.state | default('present') == 'present'
@@ -96,7 +97,7 @@
     - docker
 
 - name: Handle registry logout
-  loop: "{{ docker_registries }}"
+  loop: "{{ docker_registries_general + docker_registries_extra }}"
   loop_control:
     label: "{{ item.url | default('hub.docker.com') }}"
   when: item.state | default('present') == 'absent'
