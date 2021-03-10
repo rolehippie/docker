@@ -32,7 +32,6 @@
 - name: Install required packages
   loop:
     - "{{ 'docker-ce' if docker_upstream_version else 'docker.io' }}"
-    - pass
     - python3-docker
   package:
     name: "{{ item }}"
