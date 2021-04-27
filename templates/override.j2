@@ -1,7 +1,9 @@
 [Service]
 {% if docker_mount_flags | default(False) %}
 MountFlags={{ docker_mount_flags }}
-
 {% endif %}
+{% if docker_daemon_command | default(False) %}
+
 ExecStart=
 ExecStart={{ docker_daemon_command }}
+{% endif %}
