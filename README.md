@@ -1,6 +1,6 @@
 # docker
 
-[![Source Code](https://img.shields.io/badge/github-source%20code-blue?logo=github&logoColor=white)](https://github.com/rolehippie/docker) [![Build Status](https://img.shields.io/drone/build/rolehippie/docker/master?logo=drone)](https://cloud.drone.io/rolehippie/docker) [![License: Apache-2.0](https://img.shields.io/github/license/rolehippie/docker)](https://github.com/rolehippie/docker/blob/master/LICENSE) 
+[![Source Code](https://img.shields.io/badge/github-source%20code-blue?logo=github&logoColor=white)](https://github.com/rolehippie/docker) [![Testing Build](https://github.com/rolehippie/docker/workflows/testing/badge.svg)](https://github.com/rolehippie/docker/actions?query=workflow%3Atesting) [![Readme Build](https://github.com/rolehippie/docker/workflows/readme/badge.svg)](https://github.com/rolehippie/docker/actions?query=workflow%3Areadme) [![Galaxy Build](https://github.com/rolehippie/docker/workflows/galaxy/badge.svg)](https://github.com/rolehippie/docker/actions?query=workflow%3Agalaxy) [![License: Apache-2.0](https://img.shields.io/github/license/rolehippie/docker)](https://github.com/rolehippie/docker/blob/master/LICENSE) 
 
 Ansible role to install and configure Docker container runtime. 
 
