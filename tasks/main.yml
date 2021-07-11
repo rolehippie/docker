@@ -33,6 +33,7 @@
   loop:
     - "{{ 'docker-ce' if docker_upstream_version else 'docker.io' }}"
     - python3-docker
+    - python3-distutils
   package:
     name: "{{ item }}"
     state: present
