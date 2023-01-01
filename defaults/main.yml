@@ -27,9 +27,6 @@ docker_registries_extra: []
 # @var docker_upstream_version:description: Install from upstream repository
 docker_upstream_version: True
 
-# @var docker_credential_helpers:description: Install credentials helper, otherwise drop it
-docker_credential_helpers: False
-
 # @var docker_mount_flags:description: Optionally define mount flags for systemd
 docker_mount_flags:
 

@@ -43,11 +43,6 @@
   tags:
     - docker
 
-- name: Install credential helpers
-  package:
-    name: golang-docker-credential-helpers
-    state: "{{ 'present' if docker_credential_helpers | default(False) else 'absent' }}"
-
 - name: Write service override
   when: docker_daemon_override
   notify:
