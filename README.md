@@ -12,7 +12,6 @@ Building and improving this Ansible role have been sponsored by my current and p
 
 - [Default Variables](#default-variables)
   - [docker_arch](#docker_arch)
-  - [docker_credential_helpers](#docker_credential_helpers)
   - [docker_daemon_command](#docker_daemon_command)
   - [docker_daemon_config](#docker_daemon_config)
   - [docker_daemon_override](#docker_daemon_override)
@@ -39,16 +38,6 @@ Target system architecture used to select correct deb repository
 
 ```YAML
 docker_arch: amd64
-```
-
-### docker_credential_helpers
-
-Install credentials helper, otherwise drop it
-
-#### Default value
-
-```YAML
-docker_credential_helpers: false
 ```
 
 ### docker_daemon_command
