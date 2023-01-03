@@ -1,6 +1,6 @@
 # docker
 
-[![Source Code](https://img.shields.io/badge/github-source%20code-blue?logo=github&logoColor=white)](https://github.com/rolehippie/docker) [![Testing Build](https://github.com/rolehippie/docker/workflows/testing/badge.svg)](https://github.com/rolehippie/docker/actions?query=workflow%3Atesting) [![Readme Build](https://github.com/rolehippie/docker/workflows/readme/badge.svg)](https://github.com/rolehippie/docker/actions?query=workflow%3Areadme) [![Galaxy Build](https://github.com/rolehippie/docker/workflows/galaxy/badge.svg)](https://github.com/rolehippie/docker/actions?query=workflow%3Agalaxy) [![License: Apache-2.0](https://img.shields.io/github/license/rolehippie/docker)](https://github.com/rolehippie/docker/blob/master/LICENSE)
+[![Source Code](https://img.shields.io/badge/github-source%20code-blue?logo=github&logoColor=white)](https://github.com/rolehippie/docker) [![General Workflow](https://github.com/rolehippie/docker/actions/workflows/general.yml/badge.svg)](https://github.com/rolehippie/docker/actions/workflows/general.yml) [![Readme Workflow](https://github.com/rolehippie/docker/actions/workflows/readme.yml/badge.svg)](https://github.com/rolehippie/docker/actions/workflows/readme.yml) [![Galaxy Workflow](https://github.com/rolehippie/docker/actions/workflows/galaxy.yml/badge.svg)](https://github.com/rolehippie/docker/actions/workflows/galaxy.yml) [![License: Apache-2.0](https://img.shields.io/github/license/rolehippie/docker)](https://github.com/rolehippie/docker/blob/master/LICENSE)
 
 Ansible role to install and configure Docker container runtime.
 
@@ -10,21 +10,38 @@ Building and improving this Ansible role have been sponsored by my current and p
 
 ## Table of content
 
-- [Default Variables](#default-variables)
-  - [docker_arch](#docker_arch)
-  - [docker_daemon_command](#docker_daemon_command)
-  - [docker_daemon_config](#docker_daemon_config)
-  - [docker_daemon_override](#docker_daemon_override)
-  - [docker_mount_flags](#docker_mount_flags)
-  - [docker_networks_extra](#docker_networks_extra)
-  - [docker_networks_general](#docker_networks_general)
-  - [docker_registries_extra](#docker_registries_extra)
-  - [docker_registries_general](#docker_registries_general)
-  - [docker_upstream_version](#docker_upstream_version)
-- [Discovered Tags](#discovered-tags)
-- [Dependencies](#dependencies)
-- [License](#license)
-- [Author](#author)
+- [docker](#docker)
+  - [Sponsor](#sponsor)
+  - [Table of content](#table-of-content)
+  - [Default Variables](#default-variables)
+    - [docker\_arch](#docker_arch)
+      - [Default value](#default-value)
+    - [docker\_daemon\_command](#docker_daemon_command)
+      - [Default value](#default-value-1)
+    - [docker\_daemon\_config](#docker_daemon_config)
+      - [Default value](#default-value-2)
+    - [docker\_daemon\_override](#docker_daemon_override)
+      - [Default value](#default-value-3)
+    - [docker\_mount\_flags](#docker_mount_flags)
+      - [Default value](#default-value-4)
+    - [docker\_networks\_extra](#docker_networks_extra)
+      - [Default value](#default-value-5)
+      - [Example usage](#example-usage)
+    - [docker\_networks\_general](#docker_networks_general)
+      - [Default value](#default-value-6)
+      - [Example usage](#example-usage-1)
+    - [docker\_registries\_extra](#docker_registries_extra)
+      - [Default value](#default-value-7)
+      - [Example usage](#example-usage-2)
+    - [docker\_registries\_general](#docker_registries_general)
+      - [Default value](#default-value-8)
+      - [Example usage](#example-usage-3)
+    - [docker\_upstream\_version](#docker_upstream_version)
+      - [Default value](#default-value-9)
+  - [Discovered Tags](#discovered-tags)
+  - [Dependencies](#dependencies)
+  - [License](#license)
+  - [Author](#author)
 
 ---
 
