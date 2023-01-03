@@ -11,9 +11,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Release please
-        uses: google-github-actions/release-please-action@v3
+      - name: Checkout source
+        uses: actions/checkout@v3
         with:
-          release-type: simple
+          token: ${{ secrets.BOT_ACCESS_TOKEN }}
+
+      - name: Semantic release
+        uses: cycjimmy/semantic-release-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.BOT_ACCESS_TOKEN }}
+        with:
+          extra_plugins: |
+            conventional-changelog-conventionalcommits
 
 ...
