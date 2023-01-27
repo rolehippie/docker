@@ -185,6 +185,8 @@ docker_upstream_version: true
 
 ## Discovered Tags
 
+**_containerd_**
+
 **_docker_**
 
 
