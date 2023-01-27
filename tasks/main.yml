@@ -37,7 +37,7 @@
     path: /etc/apt/keyrings
     owner: root
     group: root
-    mode:
+    mode: u=rwx,g=rx,o=rx
     state: directory
   tags:
     - docker
@@ -45,10 +45,18 @@
 - name: Download repo key
   when: docker_upstream_version
   get_url:
-    url: https://download.docker.com/linux/ubuntu/gpg 
-    dest: /etc/apt/keyrings/docker.gpg
+    url: https://download.docker.com/linux/ubuntu/gpg
+    dest: /etc/apt/keyrings/docker.asc
   tags:
-    - docker
+    - containerd
+
+- name: Transform repo key
+  when: docker_upstream_version
+  shell:
+    cmd: cat /etc/apt/keyrings/docker.asc | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    creates: /etc/apt/keyrings/docker.gpg
+  tags:
+    - containerd
 
 - name: Add apt repository
   when: docker_upstream_version
