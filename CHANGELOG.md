@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.0](https://github.com/rolehippie/docker/compare/v1.0.0...v1.1.0) (2023-01-30)
+
+
+### Features
+
+* replace old apt key handling ([2af12ee](https://github.com/rolehippie/docker/commit/2af12ee33c3a8d12521c5c779b6a1c6e87265018))
+
+
+### Bugfixes
+
+* add missing dearmor to new gpg key ([ec39037](https://github.com/rolehippie/docker/commit/ec390376c2cbdfb33ec2501e6399ef0a80d16f80))
+* download the right gpg key for repo ([8cbaa0d](https://github.com/rolehippie/docker/commit/8cbaa0d06f48bd8f2fafea292321d2b6456cd515))
+
 ## 1.0.0 (2023-01-03)
 
 ### Features
