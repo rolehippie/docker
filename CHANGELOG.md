@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/rolehippie/docker/compare/v1.1.0...v1.2.0) (2023-04-17)
+
+
+### Features
+
+* drop legacy steps, use unified path for repo key ([9c399d6](https://github.com/rolehippie/docker/commit/9c399d6bbb3055f9f25692110865dc23f3a4c824))
+
 ## [1.1.0](https://github.com/rolehippie/docker/compare/v1.0.0...v1.1.0) (2023-01-30)
 
 
