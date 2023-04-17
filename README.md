@@ -21,6 +21,7 @@ Building and improving this Ansible role have been sponsored by my current and p
   - [docker_daemon_command](#docker_daemon_command)
   - [docker_daemon_config](#docker_daemon_config)
   - [docker_daemon_override](#docker_daemon_override)
+  - [docker_keyring](#docker_keyring)
   - [docker_mount_flags](#docker_mount_flags)
   - [docker_networks_extra](#docker_networks_extra)
   - [docker_networks_general](#docker_networks_general)
@@ -82,6 +83,16 @@ docker_daemon_config:
 
 ```YAML
 docker_daemon_override: false
+```
+
+### docker_keyring
+
+Path for the repository keyring
+
+#### Default value
+
+```YAML
+docker_keyring: /usr/share/keyrings/docker-archive-keyring.gpg
 ```
 
 ### docker_mount_flags
@@ -195,8 +206,6 @@ docker_upstream_version: true
 ```
 
 ## Discovered Tags
-
-**_containerd_**
 
 **_docker_**
 
