@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/rolehippie/docker/compare/v1.2.0...v1.2.1) (2023-07-24)
+
+
+### Bugfixes
+
+* remove old repo with outdated key path ([3d35d2c](https://github.com/rolehippie/docker/commit/3d35d2ca164da20ed02f16bdd12939f9b5a5e419))
+
 ## [1.2.0](https://github.com/rolehippie/docker/compare/v1.1.0...v1.2.0) (2023-04-17)
 
 
