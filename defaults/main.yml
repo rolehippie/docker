@@ -1,4 +1,3 @@
-# Standards: 1.2
 ---
 # @var docker_registries_general:description: List of general docker registries to auto login
 # @var docker_registries_general:example: >
