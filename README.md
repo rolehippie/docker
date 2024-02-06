@@ -211,7 +211,7 @@ docker_upstream_version: true
 
 ## Dependencies
 
-- None
+- [community.docker](https://github.com/ansible-collections/community.docker)
 
 ## License
 
