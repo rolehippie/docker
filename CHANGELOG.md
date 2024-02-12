@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.0.0](https://github.com/rolehippie/docker/compare/v1.2.1...v2.0.0) (2024-02-12)
+
+
+### Features
+
+* drop support for ubuntu 18.04 ([4c3b544](https://github.com/rolehippie/docker/commit/4c3b5441fe0447bc3384f7d8384fa1da6a228e09))
+* used full qualified collection names ([e52293e](https://github.com/rolehippie/docker/commit/e52293ee4bcb199030de9adbb4dfbc64959b0265))
+
+
+### Bugfixes
+
+* remove meta requirements and document used collections ([6dd8520](https://github.com/rolehippie/docker/commit/6dd8520ff4c98fb5353d03a99fede5548f9cc60d))
+
 ## [1.2.1](https://github.com/rolehippie/docker/compare/v1.2.0...v1.2.1) (2023-07-24)
 
 
