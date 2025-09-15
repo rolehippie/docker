@@ -61,6 +61,8 @@
             ps: with ps; [
               docker
               molecule
+              pytest
+              pytest-testinfra
             ]
           );
         in
@@ -79,7 +81,7 @@
               default = {
                 git-hooks = {
                   hooks = {
-                    nixpkgs-fmt = {
+                    nixfmt-rfc-style = {
                       enable = true;
                     };
                     ansible-lint = {
@@ -101,10 +103,10 @@
                 };
 
                 packages = with pkgs; [
-                  dockermolecule
-                  nixpkgs-fmt
-                  ansible-lint
                   ansible-doctor
+                  ansible-lint
+                  dockermolecule
+                  nixfmt-rfc-style
                 ];
               };
             };
