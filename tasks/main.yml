@@ -53,7 +53,7 @@
   loop:
     - "{{ 'docker-ce' if docker_upstream_version else 'docker.io' }}"
     - python3-docker
-    - python3-distutils
+    - "{{ 'python3-distutils' if ansible_distribution_major_version is version('24', '<') else omit }}"
   ansible.builtin.package:
     name: "{{ item }}"
     state: present
