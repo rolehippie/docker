@@ -86,6 +86,7 @@
                     };
                     ansible-lint = {
                       enable = true;
+                      pass_filenames = false;
                     };
                   };
                 };

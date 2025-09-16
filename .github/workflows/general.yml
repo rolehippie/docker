@@ -11,6 +11,9 @@ name: general
     branches:
       - master
 
+permissions:
+  contents: read
+
 jobs:
   linting:
     runs-on: ubuntu-latest
