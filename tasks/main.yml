@@ -16,7 +16,7 @@
   ansible.builtin.apt_repository:
     repo: "deb [arch={{ docker_arch }} signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
     filename: docker
-    update_cache: False
+    update_cache: false
     state: absent
   tags:
     - docker
@@ -32,10 +32,34 @@
     - docker
 
 - name: Download repo key
-  when: docker_upstream_version
-  ansible.builtin.shell:
-    cmd: "curl -sSL 'https://download.docker.com/linux/ubuntu/gpg' | gpg --dearmor --output {{ docker_keyring }}"
-    creates: "{{ docker_keyring }}"
+  when:
+    - docker_upstream_version
+  register: docker_key_download
+  ansible.builtin.get_url:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    dest: "{{ docker_keyring }}.asc"
+    mode: u=rw,g=r,o=r
+    force: true
+  tags:
+    - docker
+
+- name: Check repo key
+  when:
+    - docker_upstream_version
+  register: docker_key_status
+  ansible.builtin.stat:
+    path: "{{ docker_keyring }}"
+  tags:
+    - docker
+
+- name: Dearmor repo key
+  when:
+    - docker_upstream_version
+    - docker_key_download.changed or not docker_key_status.stat.exists
+  register: docker_key_convert
+  changed_when: docker_key_convert.rc == 0
+  ansible.builtin.command:
+    cmd: "gpg --dearmor -o {{ docker_keyring }} {{ docker_keyring }}.asc"
   tags:
     - docker
 
@@ -44,7 +68,7 @@
   ansible.builtin.apt_repository:
     repo: "deb [arch={{ docker_arch }} signed-by={{ docker_keyring }}] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
     filename: docker
-    update_cache: True
+    update_cache: true
     state: present
   tags:
     - docker
@@ -89,9 +113,9 @@
   ansible.builtin.systemd:
     name: docker
     state: started
-    daemon_reload: True
-    masked: False
-    enabled: True
+    daemon_reload: true
+    masked: false
+    enabled: true
   tags:
     - docker
 
@@ -101,7 +125,7 @@
     label: "{{ item.name }}"
   community.docker.docker_network:
     name: "{{ item.name }}"
-    enable_ipv6: "{{ item.enable_ipv6 | default(False) }}"
+    enable_ipv6: "{{ item.enable_ipv6 | default(false) }}"
     ipam_config: "{{ item.ipam_config | default([]) }}"
     force: "{{ item.force | default(omit) }}"
     state: "{{ item.state | default('present') }}"
@@ -114,7 +138,7 @@
     label: "{{ item.url | default('hub.docker.com') }}"
   when: item.state | default('present') == 'present'
   register: docker_login_command
-  changed_when: False
+  changed_when: false
   failed_when: docker_login_command.rc != 0
   ansible.builtin.command:
     cmd: "docker login --username {{ item.username | quote }} --password-stdin {{ item.url | default('') }}"

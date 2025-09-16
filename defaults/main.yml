@@ -6,7 +6,7 @@
 #     username: docker
 #     password: secure
 #     email: docker@example.com
-#     reauthorize: False
+#     reauthorize: false
 #     state: present
 # @end
 docker_registries_general: "{{ docker_registries | default([]) }}"
@@ -18,19 +18,19 @@ docker_registries_general: "{{ docker_registries | default([]) }}"
 #     username: docker
 #     password: secure
 #     email: docker@example.com
-#     reauthorize: False
+#     reauthorize: false
 #     state: present
 # @end
 docker_registries_extra: []
 
 # @var docker_upstream_version:description: Install from upstream repository
-docker_upstream_version: True
+docker_upstream_version: true
 
 # @var docker_mount_flags:description: Optionally define mount flags for systemd
 docker_mount_flags:
 
 # @var docker_daemon_command:description: Inject a service override into systemd
-docker_daemon_override: False
+docker_daemon_override: false
 
 # @var docker_daemon_command:description: Command executed to start the daemon
 docker_daemon_command: /usr/bin/dockerd -H unix://
@@ -41,17 +41,17 @@ docker_daemon_config:
   log-opts:
     max-size: 5m
     max-file: "3"
-  live-restore: True
+  live-restore: true
 
 # @var docker_networks_general:description: List of general docker networks to create
 # @var docker_networks_general:example: >
 # docker_networks_general:
 #   - name: traefik
 #     driver: bridge
-#     enable_ipv6: True
+#     enable_ipv6: true
 #     ipam_config:
 #       - subnet: fdd1:ac8c:0557:7ce1::/64
-#     force: False
+#     force: false
 #     state: present
 # @end
 docker_networks_general: []
@@ -61,10 +61,10 @@ docker_networks_general: []
 # docker_networks_extra:
 #   - name: traefik
 #     driver: bridge
-#     enable_ipv6: True
+#     enable_ipv6: true
 #     ipam_config:
 #       - subnet: fdd1:ac8c:0557:7ce1::/64
-#     force: False
+#     force: false
 #     state: present
 # @end
 docker_networks_extra: []

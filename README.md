@@ -120,10 +120,10 @@ docker_networks_extra: []
 docker_networks_extra:
   - name: traefik
     driver: bridge
-    enable_ipv6: True
+    enable_ipv6: true
     ipam_config:
       - subnet: fdd1:ac8c:0557:7ce1::/64
-    force: False
+    force: false
     state: present
 ```
 
@@ -143,10 +143,10 @@ docker_networks_general: []
 docker_networks_general:
   - name: traefik
     driver: bridge
-    enable_ipv6: True
+    enable_ipv6: true
     ipam_config:
       - subnet: fdd1:ac8c:0557:7ce1::/64
-    force: False
+    force: false
     state: present
 ```
 
@@ -168,7 +168,7 @@ docker_registries_extra:
     username: docker
     password: secure
     email: docker@example.com
-    reauthorize: False
+    reauthorize: false
     state: present
 ```
 
@@ -190,7 +190,7 @@ docker_registries_general:
     username: docker
     password: secure
     email: docker@example.com
-    reauthorize: False
+    reauthorize: false
     state: present
 ```
 
