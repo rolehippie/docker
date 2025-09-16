@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.1.0](https://github.com/rolehippie/docker/compare/v2.0.0...v2.1.0) (2025-09-16)
+
+
+### Features
+
+* automated detection of used arch ([4ccd89d](https://github.com/rolehippie/docker/commit/4ccd89d8d55531dcb8b55319d14d3dc2ce770313))
+* integrate lint and update repo behavior ([e3fb720](https://github.com/rolehippie/docker/commit/e3fb720358ccc22175f7def8ba35ce027a6bdc62))
+
+
+### Bugfixes
+
+* do not install distutils for 24.04 ([e50c94d](https://github.com/rolehippie/docker/commit/e50c94debdfd32da5043d7452047c5ae7bcbe161))
+
 ## [2.0.0](https://github.com/rolehippie/docker/compare/v1.2.1...v2.0.0) (2024-02-12)
 
 
