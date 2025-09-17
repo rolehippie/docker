@@ -2,7 +2,7 @@
 dependency:
   name: galaxy
   options:
-    role-file: requirements.yml
+    role-file: molecule/requirements.yml
   env:
     ANSIBLE_GALAXY_DISPLAY_PROGRESS: "false"
 
