@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.1](https://github.com/rolehippie/docker/compare/v2.1.0...v2.1.1) (2025-09-22)
+
+
+### Bugfixes
+
+* add noble to supported versions ([882087e](https://github.com/rolehippie/docker/commit/882087e0b0bf3ad5aef2ef6a830dec1f0163e4fd))
+* use right name for ansible-doctor ([7d7578e](https://github.com/rolehippie/docker/commit/7d7578e3137763b632e0932dd55acc03fddf8bc9))
+* we need only one requirements file ([6078155](https://github.com/rolehippie/docker/commit/60781551657f651492b386ad9778323aeef53d8f))
+
 ## [2.1.0](https://github.com/rolehippie/docker/compare/v2.0.0...v2.1.0) (2025-09-16)
 
 
