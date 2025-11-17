@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.0](https://github.com/rolehippie/docker/compare/v2.1.1...v3.0.0) (2025-11-17)
+
+
+### Features
+
+* **major:** update dependency community.docker to v5 ([#44](https://github.com/rolehippie/docker/issues/44)) ([1451900](https://github.com/rolehippie/docker/commit/1451900b83ccbc074972bb20416f58f99f255c4c))
+
 ## [2.1.1](https://github.com/rolehippie/docker/compare/v2.1.0...v2.1.1) (2025-09-22)
 
 
