@@ -1,5 +1,33 @@
 # Changelog
 
+## [3.1.0](https://github.com/rolehippie/docker/compare/v3.0.0...v3.1.0) (2026-03-30)
+
+### Dependencies
+
+* **minor:** update dependency community.docker to >=5.1.0,<5.2.0 ([#62](https://github.com/rolehippie/docker/issues/62)) ([814dcc0](https://github.com/rolehippie/docker/commit/814dcc02e65fb39a314e9c46741a4141e0828bdf))
+
+### Miscellaneous
+
+* **flake:** updated lockfile [skip ci] ([fe1eb94](https://github.com/rolehippie/docker/commit/fe1eb940fae889cc6b3ed6d837004e8a829806bd))
+* **flake:** updated lockfile [skip ci] ([e96e2d2](https://github.com/rolehippie/docker/commit/e96e2d2e6e265daf35a77a761ab2d9f6323ff46c))
+* **flake:** updated lockfile [skip ci] ([9d94af1](https://github.com/rolehippie/docker/commit/9d94af1e428b87192c68e68fb7774c5e601f0615))
+* **flake:** updated lockfile [skip ci] ([182fbd5](https://github.com/rolehippie/docker/commit/182fbd53d686aaa22dda3c30923ff8d83be1af07))
+* **flake:** updated lockfile [skip ci] ([e1cc58b](https://github.com/rolehippie/docker/commit/e1cc58b5c4bc4c8b0d835eb888119f360a8af05b))
+* **flake:** updated lockfile [skip ci] ([629414c](https://github.com/rolehippie/docker/commit/629414cebdb8854544d6eeeab2dca2c5561d61ab))
+* **flake:** updated lockfile [skip ci] ([75043e0](https://github.com/rolehippie/docker/commit/75043e0125b2dcbb7c276f3ad58e645e610151d2))
+* **flake:** updated lockfile [skip ci] ([80418a0](https://github.com/rolehippie/docker/commit/80418a0e9a96c7e9125f1c6a3f6273fa64881150))
+* **flake:** updated lockfile [skip ci] ([4db74db](https://github.com/rolehippie/docker/commit/4db74db4f1891cb15519712a9961908f19558b46))
+* **flake:** updated lockfile [skip ci] ([841508a](https://github.com/rolehippie/docker/commit/841508af416aef50299d8022e4578a9ae420f2ab))
+* **flake:** updated lockfile [skip ci] ([d4087f3](https://github.com/rolehippie/docker/commit/d4087f353dfa16b2c967b3b5f51f6ce254ed5cfe))
+* **flake:** updated lockfile [skip ci] ([d50a360](https://github.com/rolehippie/docker/commit/d50a3602f7b3461d7de9ceec3364e8c60621e647))
+* **flake:** updated lockfile [skip ci] ([0861a46](https://github.com/rolehippie/docker/commit/0861a46a485e4734129fd4a030b812ef38e1b616))
+* **flake:** updated lockfile [skip ci] ([9f5ff2a](https://github.com/rolehippie/docker/commit/9f5ff2a5c69775998e845ef608ac78a7a265870e))
+* **flake:** updated lockfile [skip ci] ([330c9fe](https://github.com/rolehippie/docker/commit/330c9fe17cc258a91f633a5e61229b4c36771485))
+* **flake:** updated lockfile [skip ci] ([47e780c](https://github.com/rolehippie/docker/commit/47e780c3c86b3d5dbc141a535d7e7225451acbde))
+* **flake:** updated lockfile [skip ci] ([eba9a33](https://github.com/rolehippie/docker/commit/eba9a33ed3c08e797e9363f795555586bb0bc9eb))
+* **flake:** updated lockfile [skip ci] ([c1f637a](https://github.com/rolehippie/docker/commit/c1f637a09707d0c7630a3158ab3639599222506d))
+* **flake:** updated lockfile [skip ci] ([a4efa9b](https://github.com/rolehippie/docker/commit/a4efa9b2e48a5b6b919c1d59e6a2854166e81af0))
+
 ## [3.0.0](https://github.com/rolehippie/docker/compare/v2.1.1...v3.0.0) (2025-11-17)
 
 
