@@ -48,8 +48,7 @@ Target system architecture used to select correct deb repository
 #### Default value
 
 ```YAML
-docker_arch: "{{ 'arm64' if ansible_architecture == 'aarch64' or ansible_architecture
-  == 'arm64' else 'amd64' }}"
+docker_arch: "{{ 'arm64' if ansible_architecture == 'aarch64' or ansible_architecture == 'arm64' else 'amd64' }}"
 ```
 
 ### docker_daemon_command
