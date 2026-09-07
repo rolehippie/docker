@@ -14,7 +14,7 @@
 
 - name: Remove legacy repo
   ansible.builtin.apt_repository:
-    repo: "deb [arch={{ docker_arch }} signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    repo: "deb [arch={{ docker_arch }} signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_facts['distribution_release'] }} stable"
     filename: docker
     update_cache: false
     state: absent
@@ -59,14 +59,14 @@
   register: docker_key_convert
   changed_when: docker_key_convert.rc == 0
   ansible.builtin.command:
-    cmd: "gpg --dearmor -o {{ docker_keyring }} {{ docker_keyring }}.asc"
+    cmd: "gpg --batch --yes --dearmor -o {{ docker_keyring }} {{ docker_keyring }}.asc"
   tags:
     - docker
 
 - name: Add apt repository
   when: docker_upstream_version
   ansible.builtin.apt_repository:
-    repo: "deb [arch={{ docker_arch }} signed-by={{ docker_keyring }}] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    repo: "deb [arch={{ docker_arch }} signed-by={{ docker_keyring }}] https://download.docker.com/linux/ubuntu {{ ansible_facts['distribution_release'] }} stable"
     filename: docker
     update_cache: true
     state: present
@@ -77,7 +77,7 @@
   loop:
     - "{{ 'docker-ce' if docker_upstream_version else 'docker.io' }}"
     - python3-docker
-    - "{{ 'python3-distutils' if ansible_distribution_major_version is version('24', '<') else omit }}"
+    - "{{ 'python3-distutils' if ansible_facts['distribution_major_version'] is version('24', '<') else omit }}"
   ansible.builtin.package:
     name: "{{ item }}"
     state: present
