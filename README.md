@@ -27,6 +27,7 @@ Building and improving this Ansible role have been sponsored by my current and p
   - [docker_networks_general](#docker_networks_general)
   - [docker_registries_extra](#docker_registries_extra)
   - [docker_registries_general](#docker_registries_general)
+  - [docker_repo_legacy_format](#docker_repo_legacy_format)
   - [docker_upstream_version](#docker_upstream_version)
 - [Discovered Tags](#discovered-tags)
 - [Dependencies](#dependencies)
@@ -192,6 +193,16 @@ docker_registries_general:
     email: docker@example.com
     reauthorize: false
     state: present
+```
+
+### docker_repo_legacy_format
+
+Format of the repository based on distribution version
+
+#### Default value
+
+```YAML
+docker_repo_legacy_format: "{{ true if ansible_facts['distribution_version'] is version('24.04', '<') else false }}"
 ```
 
 ### docker_upstream_version

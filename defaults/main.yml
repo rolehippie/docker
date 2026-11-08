@@ -72,6 +72,9 @@ docker_networks_extra: []
 # @var docker_arch:description: Target system architecture used to select correct deb repository
 docker_arch: "{{ 'arm64' if ansible_facts['architecture'] in ['aarch64', 'arm64'] else 'amd64' }}"
 
+# @var docker_repo_legacy_format:description: Format of the repository based on distribution version
+docker_repo_legacy_format: "{{ true if ansible_facts['distribution_version'] is version('24.04', '<') else false }}"
+
 # @var docker_keyring:description: Path for the repository keyring
 docker_keyring: /usr/share/keyrings/docker-archive-keyring.gpg
 

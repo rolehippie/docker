@@ -12,47 +12,95 @@
   tags:
     - docker
 
-- name: Download repo key
+- name: Add legacy repository
   when:
     - docker_upstream_version
-  register: docker_key_download
-  ansible.builtin.get_url:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    dest: "{{ docker_keyring }}.asc"
-    mode: u=rw,g=r,o=r
-    force: true
+    - docker_repo_legacy_format
   tags:
     - docker
+  block:
+    - name: Download repo key
+      register: docker_key_download
+      ansible.builtin.get_url:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        dest: "{{ docker_keyring }}.asc"
+        mode: u=rw,g=r,o=r
+        force: true
+      tags:
+        - docker
 
-- name: Check repo key
+    - name: Check repo key
+      register: docker_key_status
+      ansible.builtin.stat:
+        path: "{{ docker_keyring }}"
+      tags:
+        - docker
+
+    - name: Dearmor repo key
+      when:
+        - docker_key_download.changed or not docker_key_status.stat.exists
+      register: docker_key_convert
+      changed_when: docker_key_convert.rc == 0
+      ansible.builtin.command:
+        cmd: "gpg --batch --yes --dearmor -o {{ docker_keyring }} {{ docker_keyring }}.asc"
+      tags:
+        - docker
+
+    - name: Add apt repository
+      ansible.builtin.apt_repository:
+        repo: "deb [arch={{ docker_arch }} signed-by={{ docker_keyring }}] https://download.docker.com/linux/ubuntu {{ ansible_facts['distribution_release'] }} stable"
+        filename: docker
+        update_cache: true
+        state: present
+      tags:
+        - docker
+
+    - name: Drop other files
+      loop:
+        - /etc/apt/sources.list.d/docker.sources
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+      tags:
+        - docker
+
+- name: Add sources repository
   when:
     - docker_upstream_version
-  register: docker_key_status
-  ansible.builtin.stat:
-    path: "{{ docker_keyring }}"
+    - not docker_repo_legacy_format
   tags:
     - docker
+  block:
+    - name: Add apt repository
+      register: docker_repo_add
+      ansible.builtin.deb822_repository:
+        name: docker
+        types: deb
+        uris: https://download.docker.com/linux/ubuntu
+        suites: "{{ ansible_facts['distribution_release'] }}"
+        components: stable
+        architectures: "{{ docker_arch }}"
+        signed_by: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+      tags:
+        - docker
 
-- name: Dearmor repo key
-  when:
-    - docker_upstream_version
-    - docker_key_download.changed or not docker_key_status.stat.exists
-  register: docker_key_convert
-  changed_when: docker_key_convert.rc == 0
-  ansible.builtin.command:
-    cmd: "gpg --batch --yes --dearmor -o {{ docker_keyring }} {{ docker_keyring }}.asc"
-  tags:
-    - docker
+    - name: Update apt cache  # noqa: no-handler
+      when:
+        - docker_repo_add.changed
+      ansible.builtin.apt:
+        update_cache: true
+      tags:
+        - docker
 
-- name: Add apt repository
-  when: docker_upstream_version
-  ansible.builtin.apt_repository:
-    repo: "deb [arch={{ docker_arch }} signed-by={{ docker_keyring }}] https://download.docker.com/linux/ubuntu {{ ansible_facts['distribution_release'] }} stable"
-    filename: docker
-    update_cache: true
-    state: present
-  tags:
-    - docker
+    - name: Drop other files
+      loop:
+        - /etc/apt/sources.list.d/docker.list
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+      tags:
+        - docker
 
 - name: Install required packages
   loop:
