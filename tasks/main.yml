@@ -12,25 +12,6 @@
   tags:
     - docker
 
-- name: Remove legacy repo
-  ansible.builtin.apt_repository:
-    repo: "deb [arch={{ docker_arch }} signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_facts['distribution_release'] }} stable"
-    filename: docker
-    update_cache: false
-    state: absent
-  tags:
-    - docker
-
-- name: Remove legacy keys
-  loop:
-    - /etc/apt/keyrings/docker.asc
-    - /etc/apt/keyrings/docker.gpg
-  ansible.builtin.file:
-    path: "{{ item }}"
-    state: absent
-  tags:
-    - docker
-
 - name: Download repo key
   when:
     - docker_upstream_version
